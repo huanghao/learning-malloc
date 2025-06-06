@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  c-learning:
+    build: .
+    container_name: learning-malloc
+    volumes:
+      - .:/app
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    command: /bin/sh

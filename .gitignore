@@ -1,0 +1,34 @@
+# 编译产物
+*.o
+*.out
+ex1
+a.out
+
+# 调试文件
+*.dSYM/
+core
+vgcore.*
+
+# IDE和编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Docker相关
+.dockerignore
+
+# 临时文件
+*.tmp
+*.temp
+*.log
+
+# 备份文件
+*.bak
+*.backup
