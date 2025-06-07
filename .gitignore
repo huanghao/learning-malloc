@@ -1,8 +1,18 @@
+.env/
+sources/
+
 # 编译产物
 *.o
 *.out
 ex1
 a.out
+
+# Bazel 生成的文件和目录
+bazel-*
+.bazel/
+bazel-bin/
+bazel-out/
+bazel-testlogs/
 
 # 调试文件
 *.dSYM/
@@ -23,6 +33,16 @@ vgcore.*
 
 # Docker相关
 .dockerignore
+
+# Python相关
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+pip-log.txt
+pip-delete-this-directory.txt
 
 # 临时文件
 *.tmp

@@ -1,12 +1,24 @@
-version: '3.8'
-
 services:
   c-learning:
     build: .
-    container_name: learning-malloc
+    container_name: learning-malloc-bazel
     volumes:
       - .:/app
+      # 缓存Bazel输出以提高构建速度
+      - bazel-cache:/root/.cache/bazel
     working_dir: /app
     stdin_open: true
     tty: true
-    command: /bin/sh
+    environment:
+      - DISPLAY=${DISPLAY:-:0} # 支持图形界面（如果需要显示matplotlib图表）
+      - HTTP_PROXY=http://host.docker.internal:7890
+      - HTTPS_PROXY=http://host.docker.internal:7890
+      - http_proxy=http://host.docker.internal:7890
+      - https_proxy=http://host.docker.internal:7890
+      - NO_PROXY=localhost,127.0.0.1,::1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: /bin/bash
+
+volumes:
+  bazel-cache:

@@ -1,0 +1,35 @@
+# Bazel配置文件
+
+# 编译选项
+build --copt=-std=c11
+build --copt=-O2
+build --strip=never  # 保留调试信息
+
+# 调试配置
+build:debug --copt=-g
+build:debug --copt=-O0
+build:debug --strip=never
+
+# 发布配置
+build:release --copt=-O3
+build:release --copt=-DNDEBUG
+build:release --strip=always
+
+# 开发配置
+build:dev --copt=-g
+build:dev --copt=-Wall
+build:dev --copt=-Wextra
+build:dev --copt=-O0
+
+# 静态链接配置
+build:static --linkopt=-static
+
+# 默认使用开发配置
+build --config=dev
+
+# 测试配置
+test --test_output=all
+test --test_verbose_timeout_warnings
+
+# 清理时的行为
+clean --expunge
