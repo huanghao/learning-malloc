@@ -1,24 +1,60 @@
 services:
-  c-learning:
+  dev-env:
     build: .
-    container_name: learning-malloc-bazel
+    container_name: learning-malloc-multidev
     volumes:
       - .:/app
-      # 缓存Bazel输出以提高构建速度
-      - bazel-cache:/root/.cache/bazel
+      # 缓存目录以提高性能
+      - bazel-cache:/home/developer/.cache/bazel
+      - go-cache:/app/go/pkg/mod
+      - python-cache:/opt/venv/lib/python3.*/site-packages
+      # 持久化工具缓存
+      - go-tools:/app/go/bin
     working_dir: /app
     stdin_open: true
     tty: true
+    user: developer
     environment:
-      - DISPLAY=${DISPLAY:-:0} # 支持图形界面（如果需要显示matplotlib图表）
+      # 显示支持
+      - DISPLAY=${DISPLAY:-:0}
+      # 代理设置
       - HTTP_PROXY=http://host.docker.internal:7890
       - HTTPS_PROXY=http://host.docker.internal:7890
       - http_proxy=http://host.docker.internal:7890
       - https_proxy=http://host.docker.internal:7890
       - NO_PROXY=localhost,127.0.0.1,::1
+      # Go环境
+      - GOROOT=/usr/lib/go
+      - GOPATH=/app/go
+      - GOPROXY=https://proxy.golang.org,direct
+      - GOSUMDB=sum.golang.org
+      - GO111MODULE=on
+      # Python环境
+      - PYTHONPATH=/app
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      # Bazel环境
+      - BAZEL_OUTPUT_BASE=/home/developer/.cache/bazel
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    ports:
+      # Go应用端口
+      - "8080:8080"
+      - "8081:8081"
+      # Python应用端口
+      - "5000:5000"
+      - "8000:8000"
+      # 调试端口
+      - "2345:2345" # Go delve调试
+      - "5678:5678" # Python调试
     command: /bin/bash
 
 volumes:
   bazel-cache:
+    driver: local
+  go-cache:
+    driver: local
+  python-cache:
+    driver: local
+  go-tools:
+    driver: local

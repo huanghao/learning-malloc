@@ -26,35 +26,10 @@ build_image() {
     docker-compose build
 }
 
-# 运行程序
-run_program() {
-    echo -e "${GREEN}运行程序...${NC}"
-    docker-compose run --rm c-learning make run
-}
-
 # 进入容器shell
 enter_shell() {
     echo -e "${GREEN}进入容器shell...${NC}"
-    docker-compose run --rm c-learning /bin/sh
-}
-
-# 使用gdb调试
-debug_program() {
-    echo -e "${YELLOW}启动gdb调试...${NC}"
-    docker-compose run --rm c-learning make debug
-}
-
-# 使用valgrind检查内存
-valgrind_check() {
-    echo -e "${YELLOW}使用valgrind检查内存...${NC}"
-    docker-compose run --rm c-learning make valgrind
-}
-
-# 清理Docker资源
-clean_docker() {
-    echo -e "${RED}清理Docker资源...${NC}"
-    docker-compose down
-    docker system prune -f
+    docker-compose run --rm dev-env /bin/sh
 }
 
 # 主逻辑
@@ -62,20 +37,8 @@ case "$1" in
     build)
         build_image
         ;;
-    run)
-        run_program
-        ;;
     shell)
         enter_shell
-        ;;
-    debug)
-        debug_program
-        ;;
-    valgrind)
-        valgrind_check
-        ;;
-    clean)
-        clean_docker
         ;;
     help|--help|-h)
         show_help
