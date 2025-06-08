@@ -1,0 +1,10 @@
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+# Ignore E722: do not use bare 'except'
+ignore = ["E722"]
+
+[tool.ruff.lint.extend-per-file-ignores]
+# You can add file-specific ignores here if needed
+

@@ -408,9 +408,6 @@ def _plot_range(
 
 def _add_break_marks(ax1, ax2):
     """在两个相邻的子图之间添加断轴标记"""
-    # 获取图形坐标
-    trans_fig = ax1.transData + ax1.transAxes.inverted()
-
     # 在右侧边缘添加断轴标记
     d = 0.015  # 断轴标记的大小
     kwargs = dict(transform=ax1.transAxes, color="k", clip_on=False, linewidth=1)
@@ -424,7 +421,6 @@ def _add_break_marks(ax1, ax2):
 
 
 def main():
-
     parser = argparse.ArgumentParser(
         description="Visualize ELF file segments and sections"
     )
