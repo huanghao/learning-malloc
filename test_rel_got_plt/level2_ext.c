@@ -1,0 +1,1 @@
+int var_in_level2_ext = 33;

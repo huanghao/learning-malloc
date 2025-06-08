@@ -1,0 +1,33 @@
+digraph "Shared Library Dependencies" {
+    label="Dependency Graph for objdump";
+    labelloc=t;
+    fontsize=16;
+    fontname="Arial Bold";
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    "libbfd-2.44.so";
+    "libc.musl-aarch64.so.1";
+    "libctf.so.0";
+    "libopcodes-2.44.so";
+    "libsframe.so.1";
+    "libz.so.1";
+    "libzstd.so.1";
+    "objdump";
+    "objdump" -> "libopcodes-2.44.so" [label="1"];
+    "libopcodes-2.44.so" -> "libbfd-2.44.so" [label="2"];
+    "libbfd-2.44.so" -> "libz.so.1" [label="3"];
+    "libz.so.1" -> "libc.musl-aarch64.so.1" [label="4"];
+    "libbfd-2.44.so" -> "libzstd.so.1" [label="5"];
+    "libzstd.so.1" -> "libc.musl-aarch64.so.1" [label="6"];
+    "libbfd-2.44.so" -> "libsframe.so.1" [label="7"];
+    "libsframe.so.1" -> "libc.musl-aarch64.so.1" [label="8"];
+    "libbfd-2.44.so" -> "libc.musl-aarch64.so.1" [label="9"];
+    "libopcodes-2.44.so" -> "libc.musl-aarch64.so.1" [label="10"];
+    "objdump" -> "libctf.so.0" [label="11"];
+    "libctf.so.0" -> "libbfd-2.44.so" [label="12"];
+    "libctf.so.0" -> "libz.so.1" [label="13"];
+    "libctf.so.0" -> "libc.musl-aarch64.so.1" [label="14"];
+    "objdump" -> "libbfd-2.44.so" [label="15"];
+    "objdump" -> "libsframe.so.1" [label="16"];
+    "objdump" -> "libc.musl-aarch64.so.1" [label="17"];
+}
