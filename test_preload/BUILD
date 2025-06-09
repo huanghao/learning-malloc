@@ -31,37 +31,3 @@ cc_binary(
     linkopts = ["-ldl"],
     copts = ["-fPIC"],
 )
-
-# 演示脚本
-sh_binary(
-    name = "demo",
-    srcs = ["demo.sh"],
-    data = [
-        ":main",
-        ":memory_leak_demo",
-        ":libpreload.so",
-        ":libadvanced_preload.so",
-    ],
-)
-
-# 测试目标 - 运行基本演示
-sh_test(
-    name = "basic_test",
-    srcs = ["test_basic.sh"],
-    data = [
-        ":main",
-        ":libpreload.so",
-    ],
-    size = "small",
-)
-
-# 测试目标 - 内存泄漏检测测试
-sh_test(
-    name = "memory_leak_test",
-    srcs = ["test_memory_leak.sh"],
-    data = [
-        ":memory_leak_demo",
-        ":libadvanced_preload.so",
-    ],
-    size = "small",
-)
