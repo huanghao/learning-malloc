@@ -38,3 +38,21 @@ cc_binary(
     srcs = ["make_snan.c"],
     deps = [":print_float_sem"],
 )
+
+cc_binary(
+    name = "test_FP16",
+    srcs = ["test_FP16.c"],
+    copts = [
+        "-O2",
+        "-march=native",
+    ],
+)
+
+cc_binary(
+    name = "test_BF16",
+    srcs = ["test_BF16.c"],
+    copts = [
+        "-O2",
+        "-march=native",
+    ],
+)

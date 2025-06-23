@@ -15,5 +15,6 @@ int main() {
   print_float_sem(*pf);
   print_float_sem(3.14);
   print_float_sem(-3.14);
+  print_float_sem(-45.4);
   return 0;
 }
